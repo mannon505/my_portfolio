@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mennatullah Mohammed | Aspiring Data Engineer Portfolio</title>
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e32',
+                            950: '#090d16',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flow': 'flow 3s linear infinite',
+                    },
+                    keyframes: {
+                        flow: {
+                            '0%': { strokeDashoffset: '24' },
+                            '100%': { strokeDashoffset: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-cyan-500 selection:text-white">
+
+    <!-- Toast Notification Container (Replaces alert) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-slate-950/80 border-b border-slate-200 dark:border-slate-800/80 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <a href="#hero" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-mono font-bold text-lg shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                        M
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white">Mennatullah<span class="text-cyan-500">.data</span></span>
+                        <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider hidden sm:block">Data Engineering</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a href="#about" class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#skills" class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Tech Stack</a>
+                    <a href="#projects" class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Pipelines & Projects</a>
+                    <a href="#experience" class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#education" class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">Education</a>
+                </nav>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" aria-label="Toggle Dark Mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                        <i id="theme-icon" class="fa-solid fa-sun text-amber-400 text-sm"></i>
+                    </button>
+
+                    <!-- Contact CTA -->
+                    <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-cyan-500 text-white dark:text-slate-950 font-semibold text-sm hover:opacity-90 transition-all shadow-sm">
+                        <span>Hire / Intern</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" aria-label="Open Menu" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Nav -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-4 space-y-2">
+            <a href="#about" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+            <a href="#skills" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Tech Stack</a>
+            <a href="#projects" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Pipelines & Projects</a>
+            <a href="#experience" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Experience</a>
+            <a href="#education" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Education</a>
+            <a href="#contact" class="block px-3 py-2 rounded-lg text-sm font-semibold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+            <!-- Decorative Background Glows -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-80 bg-gradient-to-r from-cyan-500/15 via-blue-600/15 to-emerald-500/15 blur-3xl pointer-events-none rounded-full"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Column: Intro & CTAs -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <!-- Availability Badge -->
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span>Available for Data Engineer Internships</span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
+                            Hi, I'm <span class="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">Mennatullah Mohammed</span>
+                        </h1>
+
+                        <p class="text-lg sm:text-xl font-medium text-slate-700 dark:text-slate-300">
+                            Aspiring Data Engineer &nbsp;<span class="text-cyan-500">|</span>&nbsp; CS (AI Track) Undergrad
+                        </p>
+
+                        <p class="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Building reliable <span class="text-slate-900 dark:text-slate-200 font-semibold">end-to-end data pipelines</span>, automating reporting workflows, and enforcing strict <span class="text-slate-900 dark:text-slate-200 font-semibold">data quality & validation</span> using Python, SQL, and Power BI.
+                        </p>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                            <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-diagram-project"></i>
+                                <span>Explore Data Projects</span>
+                            </a>
+                            <a href="https://linkedin.com/in/menna-mohammed-474855391" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 text-slate-800 dark:text-slate-200 font-semibold text-sm transition-all flex items-center gap-2 shadow-sm">
+                                <i class="fa-brands fa-linkedin text-[#0A66C2] text-base"></i>
+                                <span>LinkedIn Profile</span>
+                            </a>
+                            <button onclick="copyToClipboard('mannon505ya@gmail.com', 'Email address')" class="px-4 py-3.5 rounded-xl bg-slate-100 dark:bg-slate-800/70 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs sm:text-sm transition-all flex items-center gap-2">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Copy Email</span>
+                            </button>
+                        </div>
+
+                        <!-- Quick Location & Contact Strip -->
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-5 pt-3 text-xs font-mono text-slate-500 dark:text-slate-400">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-cyan-500"></i> Dakahlia, Egypt</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-graduation-cap text-cyan-500"></i> GPA: 3.42 / 4.00 (Excellent)</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-code text-cyan-500"></i> ACPC Participant</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Interactive ETL Pipeline Visualization Card -->
+                    <div class="lg:col-span-5">
+                        <div class="rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden text-slate-200">
+                            <!-- Terminal Top Bar -->
+                            <div class="px-4 py-3 bg-slate-950/90 border-b border-slate-800 flex items-center justify-between">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                                    <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                                    <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                                </div>
+                                <span class="text-xs font-mono text-slate-400">etl_pipeline_engine.py</span>
+                                <button id="run-pipeline-btn" class="px-2.5 py-1 rounded-md bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 font-mono text-[11px] font-semibold transition-colors flex items-center gap-1">
+                                    <i class="fa-solid fa-play text-[9px]"></i> Run Check
+                                </button>
+                            </div>
+
+                            <!-- Interactive Visual Pipeline -->
+                            <div class="p-5 sm:p-6 space-y-5">
+                                <div class="text-xs font-mono text-slate-400 flex items-center justify-between">
+                                    <span>ARCHITECTURE PREVIEW</span>
+                                    <span id="pipeline-status" class="text-emerald-400">● READY</span>
+                                </div>
+
+                                <!-- Pipeline Nodes -->
+                                <div class="space-y-3">
+                                    <!-- Step 1: Extract -->
+                                    <div id="node-extract" class="p-3.5 rounded-xl bg-slate-850 border border-slate-700/80 flex items-center justify-between transition-all duration-300">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-9 h-9 rounded-lg bg-blue-500/15 text-blue-400 flex items-center justify-center">
+                                                <i class="fa-solid fa-database"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-mono text-blue-400">01. EXTRACT & INGEST</div>
+                                                <div class="text-sm font-semibold text-white">SQL Server & Multi-Sheet Excel</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Multi-Table</span>
+                                    </div>
+
+                                    <!-- Connector -->
+                                    <div class="flex justify-center">
+                                        <i class="fa-solid fa-arrow-down text-slate-600 text-xs"></i>
+                                    </div>
+
+                                    <!-- Step 2: Transform & Validate -->
+                                    <div id="node-transform" class="p-3.5 rounded-xl bg-slate-850 border border-slate-700/80 flex items-center justify-between transition-all duration-300">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-9 h-9 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
+                                                <i class="fa-brands fa-python"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-mono text-cyan-400">02. CLEAN & VALIDATE</div>
+                                                <div class="text-sm font-semibold text-white">Pandas, NumPy, Outlier & Null Checks</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400">99.8% Clean</span>
+                                    </div>
+
+                                    <!-- Connector -->
+                                    <div class="flex justify-center">
+                                        <i class="fa-solid fa-arrow-down text-slate-600 text-xs"></i>
+                                    </div>
+
+                                    <!-- Step 3: Load & Report -->
+                                    <div id="node-load" class="p-3.5 rounded-xl bg-slate-850 border border-slate-700/80 flex items-center justify-between transition-all duration-300">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-9 h-9 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                                                <i class="fa-solid fa-chart-line"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-mono text-amber-400">03. LOAD & AUTOMATE BI</div>
+                                                <div class="text-sm font-semibold text-white">Power BI Models & Automated Reports</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">DAX / KPI</span>
+                                    </div>
+                                </div>
+
+                                <!-- Live Console Output -->
+                                <div id="pipeline-log" class="p-3 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] text-slate-400 leading-relaxed">
+                                    <span class="text-cyan-400">&gt;</span> Click <span class="text-white font-semibold">"Run Check"</span> to simulate a live data quality & ETL validation run.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT & KEY METRICS SECTION -->
+        <section id="about" class="py-16 bg-white dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <!-- Summary Text -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                            <i class="fa-solid fa-user-astronaut"></i>
+                            <span>Professional Summary</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+                            Root-Cause Driven Data Engineering & Analytics
+                        </h2>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+                            I am a Computer Science student specializing in the <strong>Artificial Intelligence Track (GPA 3.42)</strong> at Damietta University with a strong foundation in data analytics and data engineering. I specialize in designing end-to-end data pipelines—extracting, joining, cleaning, and validating raw data against missing values, encoding errors, and statistical outliers.
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
+                            Having completed the intensive <strong>DEPI Data Analytics Track</strong> and a <strong>Generative AI Internship at CIB</strong>, I combine clean, modular Python & SQL code with clear documentation so stakeholders can trust every metric.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Cards -->
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <div class="text-3xl font-extrabold text-cyan-600 dark:text-cyan-400 font-mono">3.42</div>
+                            <div class="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1">Academic GPA</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">CS - AI Track (Excellent)</div>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <div class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">15+</div>
+                            <div class="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1">Data Projects</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">ETL, SQL & Automation</div>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <div class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">100%</div>
+                            <div class="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1">Data Validation</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Quality & Outlier Checks</div>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <div class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">ACPC</div>
+                            <div class="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1">Problem Solver</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Competitive Programming</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TECHNICAL SKILLS SECTION -->
+        <section id="skills" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+                    <span class="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">Core Capabilities</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Technical Stack & Data Toolkit</h2>
+                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+                        Tools, languages, and methodologies I use to transform raw data into reliable analytical assets.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Skill Card 1: Python & Data Processing -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
+                        <div class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-brands fa-python"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Programming & Data Processing</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Modular scripting, preprocessing, and exploratory analysis.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Python (OOP)</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Pandas</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">NumPy</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">OpenPyXL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Feature Engineering</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">EDA & Jupyter</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 2: Databases & SQL -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-500/50 transition-all shadow-sm">
+                        <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Databases & Relational Modeling</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Structured querying, schema design, and relational integrity.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">SQL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">MS SQL Server</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Multi-Table Joins</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Complex Aggregations</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Relational Modeling</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 3: Pipelines & Data Quality -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all shadow-sm">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Pipelines & Data Quality</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Ensuring clean, reliable data from ingestion to delivery.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">End-to-End ETL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Outlier Detection</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Missing Value Handling</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Automated Reporting</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Process Docs</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 4: BI & Reporting -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all shadow-sm">
+                        <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">BI & Executive Reporting</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Transforming cleaned datasets into actionable visual insights.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Power BI</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">DAX & Data Modeling</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Tableau</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Advanced Excel</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">KPI Dashboards</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 5: Statistics & AI -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all shadow-sm">
+                        <div class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Statistics, ML & GenAI</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Statistical rigor combined with modern AI foundations.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Hypothesis Testing</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Regression</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Naive Bayes</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Generative AI</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Prompt Engineering</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 6: Soft Skills & Languages -->
+                    <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 transition-all shadow-sm">
+                        <div class="w-11 h-11 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Professional & Languages</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Cross-functional collaboration and multilingual communication.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Root-Cause Analysis</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium">Attention to Detail</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-medium">Arabic (Native)</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-medium">English (B2)</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-medium">French (A2)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DATA PROJECTS SECTION -->
+        <section id="projects" class="py-20 bg-white dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div class="space-y-2">
+                        <span class="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">Featured Portfolio</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Data Pipelines & Engineering Projects</h2>
+                        <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
+                            Hands-on implementations covering data cleaning, relational schema design, automated reporting, and analytics.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Filter Tabs -->
+                    <div class="flex flex-wrap gap-2" id="project-filters">
+                        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-cyan-500 text-slate-950 transition-all">Featured Projects (5)</button>
+                        <button data-filter="pipeline" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">ETL & Automation</button>
+                        <button data-filter="sql" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">SQL & Relational</button>
+                        <button data-filter="bi" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Analytics & BI</button>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+                    
+                    <!-- Project 1 -->
+                    <article data-category="pipeline" class="project-card group flex flex-col justify-between p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all shadow-sm">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-semibold">Data Pipeline</span>
+                                <i class="fa-solid fa-code-branch text-slate-400 group-hover:text-cyan-500 transition-colors"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-500 transition-colors">
+                                Superstore Sales — Data Cleaning & Preprocessing Pipeline
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5">
+                                Built an end-to-end pipeline that cleaned and prepared raw sales data, resolved file encoding issues, engineered new analytical features, and flagged statistical outliers—fully documented in a Jupyter notebook and PDF report.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Python</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Pandas</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Jupyter</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Outlier Detection</span>
+                            </div>
+                            <button onclick="openProjectModal(0)" class="w-full py-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                                <span>Inspect Architecture & Details</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article data-category="pipeline sql bi" class="project-card group flex flex-col justify-between p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all shadow-sm">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-mono font-semibold">Full-Stack ETL</span>
+                                <i class="fa-solid fa-server text-slate-400 group-hover:text-cyan-500 transition-colors"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-500 transition-colors">
+                                End-to-End Relational Data Pipeline & BI Reporting
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5">
+                                Wrote complex multi-table SQL queries to extract, join, clean, and aggregate relational records; performed exploratory data analysis in Python and delivered executive Power BI and Excel reports tracking key metrics.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">SQL</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Python</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Power BI</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Excel</span>
+                            </div>
+                            <button onclick="openProjectModal(1)" class="w-full py-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                                <span>Inspect Architecture & Details</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article data-category="pipeline" class="project-card group flex flex-col justify-between p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all shadow-sm">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-semibold">Automation</span>
+                                <i class="fa-solid fa-gears text-slate-400 group-hover:text-cyan-500 transition-colors"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-500 transition-colors">
+                                Python + Excel Automated Reporting Tool
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5">
+                                Built an automated Python tool using Pandas and OpenPyXL that parses raw multi-sheet Excel workbooks and automatically generates standardized monthly summary reports, drastically reducing manual effort and human errors.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Python</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Pandas</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">OpenPyXL</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Excel</span>
+                            </div>
+                            <button onclick="openProjectModal(2)" class="w-full py-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                                <span>Inspect Architecture & Details</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Project 5 -->
+                    <article data-category="bi" class="project-card group flex flex-col justify-between p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all shadow-sm">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-mono font-semibold">EDA & Insights</span>
+                                <i class="fa-solid fa-magnifying-glass-chart text-slate-400 group-hover:text-cyan-500 transition-colors"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-500 transition-colors">
+                                E-Commerce Customer Churn Analysis
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5">
+                                Conducted deep exploratory analysis on e-commerce customer behavioral data to uncover key churn drivers and retention patterns, structured into a clean, reproducible, portfolio-ready Jupyter Notebook.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Python</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Pandas</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Jupyter</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Statistical EDA</span>
+                            </div>
+                            <button onclick="openProjectModal(4)" class="w-full py-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                                <span>Inspect Architecture & Details</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Project 6 -->
+                    <article data-category="bi" class="project-card group flex flex-col justify-between p-6 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/60 transition-all shadow-sm">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="px-3 py-1 rounded-full bg-teal-500/10 text-teal-600 dark:text-teal-400 text-xs font-mono font-semibold">BI Dashboard</span>
+                                <i class="fa-solid fa-file-excel text-slate-400 group-hover:text-cyan-500 transition-colors"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-500 transition-colors">
+                                Interactive Multi-Tab Sales Analytics Dashboard
+                            </h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5">
+                                Engineered an interactive multi-tab Excel dashboard featuring dynamic slicers, Pivot Tables, and VLOOKUP formulas to merge multi-sheet sales records and deliver real-time KPI filtering.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Excel</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Pivot Tables</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">Slicers</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] font-mono">VLOOKUP</span>
+                            </div>
+                            <button onclick="openProjectModal(5)" class="w-full py-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800 hover:bg-cyan-500 hover:text-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-all flex items-center justify-center gap-2">
+                                <span>Inspect Architecture & Details</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE, EDUCATION & CERTIFICATIONS SECTION -->
+        <section id="experience" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- Left Column: Training & Internships -->
+                    <div class="lg:col-span-6 space-y-8">
+                        <div class="space-y-2">
+                            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">Industry Training</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Training & Internships</h2>
+                        </div>
+
+                        <div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-800 space-y-8">
+                            <!-- Item 1: DEPI -->
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-cyan-500 ring-4 ring-slate-50 dark:ring-slate-950"></span>
+                                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                        <span class="text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">Digital Egypt Pioneers Initiative (DEPI)</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Data Analytics Track</h3>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                                        Completed comprehensive hands-on training covering the complete end-to-end data workflow—from relational SQL querying and Python data manipulation to Excel modeling, Power BI dashboards, and Prompt Engineering.
+                                    </p>
+                                    <div class="flex flex-wrap gap-1.5 mt-4">
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">Python</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">SQL</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">Power BI</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">Excel</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">Prompt Engineering</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 2: CIB -->
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-blue-500 ring-4 ring-slate-50 dark:ring-slate-950"></span>
+                                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+                                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                        <span class="text-xs font-mono font-semibold px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400">Commercial International Bank (CIB)</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Summer Internship — Generative AI in Banking</h3>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+                                        Completed a structured enterprise training track exploring and applying Generative AI concepts, data governance, and automation workflows within modern banking operations.
+                                    </p>
+                                    <div class="flex flex-wrap gap-1.5 mt-4">
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">Generative AI</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">FinTech & Banking</span>
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono">AI Workflows</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Education & Certifications -->
+                    <div id="education" class="lg:col-span-6 space-y-8">
+                        <div class="space-y-2">
+                            <span class="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">Academic Background</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Education & Credentials</h2>
+                        </div>
+
+                        <!-- University Card -->
+                        <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-slate-700 shadow-lg">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">B.Sc. Degree</span>
+                                    <h3 class="text-xl font-bold mt-1">Damietta University</h3>
+                                    <p class="text-sm text-slate-300 mt-0.5">Faculty of Computers and Artificial Intelligence</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl shrink-0">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                            </div>
+                            <div class="mt-5 pt-4 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-3 text-sm">
+                                <span class="text-slate-300">Major: <strong class="text-white">Computer Science (AI Track)</strong></span>
+                                <span class="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono font-semibold text-xs">
+                                    GPA: 3.42 (Excellent)
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Certifications & Competitive Programming -->
+                        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+                            <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-award text-amber-500"></i>
+                                <span>Certifications & Competitive Programming</span>
+                            </h3>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-certificate text-rose-500 text-base"></i>
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-900 dark:text-white">Oracle AI Certificate</div>
+                                        <div class="text-[11px] text-slate-500">Artificial Intelligence</div>
+                                    </div>
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-chart-simple text-blue-500 text-base"></i>
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-900 dark:text-white">IBM Data Analytics</div>
+                                        <div class="text-[11px] text-slate-500">Data Analytics Fundamentals</div>
+                                    </div>
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 flex items-center gap-3">
+                                    <i class="fa-solid fa-robot text-cyan-500 text-base"></i>
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-900 dark:text-white">Mahara Tech AI Course</div>
+                                        <div class="text-[11px] text-slate-500">Applied AI & ML Concepts</div>
+                                    </div>
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 flex items-center gap-3">
+                                    <i class="fa-brands fa-python text-emerald-500 text-base"></i>
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-900 dark:text-white">Python Programming</div>
+                                        <div class="text-[11px] text-slate-500">Core & Data Scripting</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ACPC Highlight -->
+                            <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-start gap-3">
+                                <i class="fa-solid fa-trophy text-amber-500 text-lg mt-0.5"></i>
+                                <div>
+                                    <div class="text-sm font-bold text-slate-900 dark:text-white">ACPC Participant</div>
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
+                                        Competed in the <strong>Arab Collegiate Programming Contest (ACPC)</strong>, sharpening algorithmic efficiency, data structures, and problem-solving under pressure.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 bg-white dark:bg-slate-900/50 border-t border-slate-200/80 dark:border-slate-800/80">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="rounded-3xl bg-slate-900 border border-slate-800 p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl">
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-cyan-500/20 blur-3xl rounded-full pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/20 blur-3xl rounded-full pointer-events-none"></div>
+
+                    <div class="relative z-10 max-w-2xl mx-auto space-y-5">
+                        <span class="inline-block px-3.5 py-1 rounded-full bg-cyan-500/15 text-cyan-400 font-mono text-xs font-semibold">
+                            LET'S CONNECT
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white">
+                            Looking for a Detail-Oriented Data Engineer Intern?
+                        </h2>
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            I'm excited to contribute to data teams building clean pipelines, reliable SQL data models, and automated reporting workflows. Feel free to reach out directly!
+                        </p>
+
+                        <!-- Contact Action Cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left">
+                            <!-- Email -->
+                            <div class="p-4 rounded-2xl bg-slate-850 border border-slate-700/80 flex flex-col justify-between gap-3">
+                                <div class="flex items-center gap-2.5 text-cyan-400">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span class="text-xs font-mono uppercase">Email</span>
+                                </div>
+                                <div class="text-xs sm:text-sm font-medium text-white break-all">mannon505ya@gmail.com</div>
+                                <div class="flex gap-2">
+                                    <a href="mailto:mannon505ya@gmail.com" class="flex-1 text-center py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-semibold text-xs hover:bg-cyan-400 transition-colors">Send</a>
+                                    <button onclick="copyToClipboard('mannon505ya@gmail.com', 'Email')" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs" title="Copy Email">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="p-4 rounded-2xl bg-slate-850 border border-slate-700/80 flex flex-col justify-between gap-3">
+                                <div class="flex items-center gap-2.5 text-emerald-400">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span class="text-xs font-mono uppercase">Phone / WhatsApp</span>
+                                </div>
+                                <div class="text-xs sm:text-sm font-medium text-white font-mono">+20 106 032 9675</div>
+                                <div class="flex gap-2">
+                                    <a href="tel:+201060329675" class="flex-1 text-center py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-semibold text-xs hover:bg-emerald-400 transition-colors">Call</a>
+                                    <button onclick="copyToClipboard('+20 106 032 9675', 'Phone number')" class="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs" title="Copy Phone">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- LinkedIn -->
+                            <div class="p-4 rounded-2xl bg-slate-850 border border-slate-700/80 flex flex-col justify-between gap-3">
+                                <div class="flex items-center gap-2.5 text-blue-400">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                    <span class="text-xs font-mono uppercase">LinkedIn</span>
+                                </div>
+                                <div class="text-xs sm:text-sm font-medium text-white truncate">in/menna-mohammed-474855391</div>
+                                <a href="https://linkedin.com/in/menna-mohammed-474855391" target="_blank" rel="noopener noreferrer" class="w-full text-center py-1.5 rounded-lg bg-blue-600 text-white font-semibold text-xs hover:bg-blue-500 transition-colors">
+                                    Connect <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Mennatullah Mohammed Abdulaziz. All rights reserved.</p>
+            <p class="font-mono">Dakahlia, Egypt &nbsp;•&nbsp; Python • SQL • Pandas • Data Pipelines</p>
+        </div>
+    </footer>
+
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative animate-[fadeIn_0.2s_ease-out]">
+            <button onclick="closeProjectModal()" aria-label="Close Modal" class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-rose-500 hover:text-white transition-colors flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <span id="modal-tag" class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-mono font-semibold">Category</span>
+            <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-3">Project Title</h3>
+            <p id="modal-desc" class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed"></p>
+            
+            <div class="mt-5 p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-2.5">
+                <div class="text-xs font-mono font-semibold text-cyan-600 dark:text-cyan-400 uppercase">Key Engineering Highlights</div>
+                <ul id="modal-highlights" class="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 list-disc pl-5"></ul>
+            </div>
+
+            <div id="modal-tech" class="flex flex-wrap gap-2 mt-5"></div>
+        </div>
+    </div>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Project Details Data for Modal Inspection
+        const projectsData = [
+            {
+                tag: "Data Pipeline & Preprocessing",
+                title: "Superstore Sales — Data Cleaning & Preprocessing Pipeline",
+                desc: "Designed an end-to-end preprocessing workflow in Python to transform raw, inconsistent retail sales records into an analysis-ready dataset.",
+                highlights: [
+                    "Resolved multi-byte character and file encoding issues during ingestion.",
+                    "Handled missing values systematically and flagged statistical outliers using IQR/Z-score rules.",
+                    "Engineered domain-specific features (shipping duration, profit margins, order cohorts).",
+                    "Documented every transformation step in a reproducible Jupyter Notebook and executive PDF report."
+                ],
+                tech: ["Python", "Pandas", "NumPy", "Jupyter Notebook", "Data Validation"]
+            },
+            {
+                tag: "Full-Stack ETL & Reporting",
+                title: "End-to-End Relational Data Pipeline",
+                desc: "Bridged relational database querying with Python exploratory analysis and executive BI dashboards.",
+                highlights: [
+                    "Wrote complex multi-table SQL joins, CTEs, and aggregations to extract clean fact/dimension views.",
+                    "Validated referential integrity and performed exploratory data analysis (EDA) in Python.",
+                    "Built interactive Power BI and Excel reports delivering automated KPI tracking."
+                ],
+                tech: ["SQL", "MS SQL Server", "Python", "Power BI", "Excel"]
+            },
+            {
+                tag: "Workflow Automation",
+                title: "Python + Excel Automated Reporting Tool",
+                desc: "Eliminated repetitive manual spreadsheet compilation by engineering a Python automation script for monthly reporting.",
+                highlights: [
+                    "Automated ingestion and parsing of multi-sheet raw Excel workbooks via Pandas and OpenPyXL.",
+                    "Applied automated schema validation checks before generating formatted summary sheets.",
+                    "Significantly reduced reporting turnaround time and prevented manual copy-paste data errors."
+                ],
+                tech: ["Python", "Pandas", "OpenPyXL", "Excel Automation"]
+            },
+            null,
+            {
+                tag: "Exploratory Data Analysis",
+                title: "E-Commerce Customer Churn Analysis",
+                desc: "Investigated behavioral and transactional indicators behind customer churn to support retention strategies.",
+                highlights: [
+                    "Cleaned customer activity logs and segmented users by tenure, order frequency, and satisfaction scores.",
+                    "Identified high-risk churn cohorts through statistical comparisons and visual distributions.",
+                    "Delivered findings in a clean, well-commented, portfolio-ready Jupyter Notebook."
+                ],
+                tech: ["Python", "Pandas", "Jupyter Notebook", "Statistical Analysis"]
+            },
+            {
+                tag: "Business Intelligence",
+                title: "Interactive Multi-Tab Sales Analytics Dashboard",
+                desc: "Developed a dynamic Excel reporting suite enabling non-technical stakeholders to slice sales performance in real time.",
+                highlights: [
+                    "Merged fragmented multi-sheet sales records using structured VLOOKUP and lookup formulas.",
+                    "Built interconnected Pivot Tables and interactive Slicers across multiple analytical tabs.",
+                    "Enabled instant filtering by region, product category, and time period."
+                ],
+                tech: ["Microsoft Excel", "Pivot Tables", "Slicers", "VLOOKUP", "KPI Reporting"]
+            }
+        ];
+
+        // Dark / Light Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcon() {
+            if (htmlEl.classList.contains('dark')) {
+                themeIcon.className = 'fa-solid fa-sun text-amber-400 text-sm';
+            } else {
+                themeIcon.className = 'fa-solid fa-moon text-slate-700 text-sm';
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            updateThemeIcon();
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Clipboard Helper with Custom Toast Notification (No alert())
+        function copyToClipboard(text, label) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast(`${label} copied to clipboard: ${text}`);
+            } catch (err) {
+                showToast(`Unable to copy ${label}`);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-900 dark:bg-slate-800 text-white border border-cyan-500/40 shadow-xl text-xs font-medium transition-all duration-300';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(8px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Interactive Hero ETL Pipeline Simulation
+        const runPipelineBtn = document.getElementById('run-pipeline-btn');
+        const pipelineStatus = document.getElementById('pipeline-status');
+        const pipelineLog = document.getElementById('pipeline-log');
+        const nodeExtract = document.getElementById('node-extract');
+        const nodeTransform = document.getElementById('node-transform');
+        const nodeLoad = document.getElementById('node-load');
+        let isRunning = false;
+
+        runPipelineBtn.addEventListener('click', () => {
+            if (isRunning) return;
+            isRunning = true;
+
+            // Reset borders
+            [nodeExtract, nodeTransform, nodeLoad].forEach(n => n.classList.remove('border-cyan-400', 'ring-1', 'ring-cyan-400/50'));
+
+            // Step 1
+            pipelineStatus.textContent = '● EXTRACTING...';
+            pipelineStatus.className = 'text-blue-400';
+            nodeExtract.classList.add('border-cyan-400', 'ring-1', 'ring-cyan-400/50');
+            pipelineLog.innerHTML = `<span class="text-blue-400">[01/03]</span> Joining relational SQL tables & parsing raw Excel sheets...`;
+
+            setTimeout(() => {
+                // Step 2
+                nodeExtract.classList.remove('border-cyan-400', 'ring-1', 'ring-cyan-400/50');
+                nodeTransform.classList.add('border-cyan-400', 'ring-1', 'ring-cyan-400/50');
+                pipelineStatus.textContent = '● VALIDATING...';
+                pipelineStatus.className = 'text-cyan-400';
+                pipelineLog.innerHTML = `<span class="text-cyan-400">[02/03]</span> Running Pandas DQ checks: 0 nulls, 14 outliers flagged, UTF-8 verified.`;
+            }, 900);
+
+            setTimeout(() => {
+                // Step 3
+                nodeTransform.classList.remove('border-cyan-400', 'ring-1', 'ring-cyan-400/50');
+                nodeLoad.classList.add('border-cyan-400', 'ring-1', 'ring-cyan-400/50');
+                pipelineStatus.textContent = '● COMPLETE';
+                pipelineStatus.className = 'text-emerald-400';
+                pipelineLog.innerHTML = `<span class="text-emerald-400">[SUCCESS]</span> Power BI dataset & monthly summary report generated in 1.8s.`;
+                isRunning = false;
+            }, 1900);
+        });
+
+        // Project Category Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-cyan-500', 'text-slate-950');
+                    b.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+                });
+                btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300');
+                btn.classList.add('bg-cyan-500', 'text-slate-950');
+
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-category');
+                    if (filter === 'all' || categories.includes(filter)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Project Details Modal Functions
+        const modal = document.getElementById('project-modal');
+        function openProjectModal(index) {
+            const p = projectsData[index];
+            document.getElementById('modal-tag').textContent = p.tag;
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-desc').textContent = p.desc;
+
+            const highlightsEl = document.getElementById('modal-highlights');
+            highlightsEl.innerHTML = p.highlights.map(item => `<li>${item}</li>`).join('');
+
+            const techEl = document.getElementById('modal-tech');
+            techEl.innerHTML = p.tech.map(t => `<span class="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-medium text-slate-700 dark:text-slate-300">${t}</span>`).join('');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeProjectModal();
+        });
+    </script>
+</body>
+</html>
